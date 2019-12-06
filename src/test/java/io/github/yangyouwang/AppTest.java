@@ -10,7 +10,6 @@ import io.github.yangyouwang.core.ControllerWrapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Unit test for simple App.
@@ -26,7 +25,7 @@ public class AppTest
     public void init() {
         // 初始化数据
         students = new ArrayList<>();
-        for (int i = 0; i <= 1000000; i++ ) {
+        for (int i = 0; i <= 100; i++ ) {
             Student student = new Student(i, "张三" + i , i % 2);
             students.add(student);
         }
@@ -36,13 +35,12 @@ public class AppTest
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue() throws ExecutionException, InterruptedException {
+    public void shouldAnswerWithTrue() {
         long startTime = System.currentTimeMillis();
         List<Map<String, Object>> wrap = ControllerWrapper.getInstance().wrap(students);
-
-//        for (Map<String, Object> map : wrap) {
-//            log.info(map.toString());
-//        }
+        for (Map<String, Object> map : wrap) {
+            log.info(map.toString());
+        }
         long endTime = System.currentTimeMillis();
         System.out.println("程序运行时间：" + (endTime - startTime) + "ms");
     }

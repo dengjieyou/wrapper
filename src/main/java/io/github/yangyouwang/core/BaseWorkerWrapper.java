@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * 任务
  * @author yangyouwang
  */
-public abstract class WorkerWrapper implements Runnable {
+public abstract class BaseWorkerWrapper implements Runnable {
 
     /**
      * 定义每一个ConcurrentLinkedQueue队列去引用Master中的ConcurrentLinkedQueue
@@ -40,7 +40,7 @@ public abstract class WorkerWrapper implements Runnable {
      * @param input  Object
      * @return Map<String, Object>
      */
-    public abstract Map<String, Object> wrap(Object input) ;
+    public abstract Map<String, Object> wrapTheMap(Object input) ;
 
 
     @Override
@@ -52,7 +52,7 @@ public abstract class WorkerWrapper implements Runnable {
                 break;
             }
             //处理子任务
-            Map<String, Object> output = wrap(input);
+            Map<String, Object> output = this.wrapTheMap(input);
             this.resultMap.put(Integer.toString(input.hashCode()), output);
         }
     }
